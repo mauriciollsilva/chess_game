@@ -1,0 +1,7 @@
+<h1>Pecas</h1>
+<ul>
+  <% @pieces.each do |piece| %>
+    <li><%= link_to piece.type, piece_path(piece) %> (Cor: <%= piece.color %>)</li>
+  <% end %>
+</ul>
+<%= link_to 'Nova Peça', new_piece_path %>

@@ -1,0 +1,20 @@
+<h1>Tabuleiro de Xadrez</h1>
+
+<table>
+  <% (0..7).each do |row| %>
+    <tr>
+      <% (0..7).each do |col| %>
+        <td>
+          <% piece = @game.pieces.find { |p| p.position == "#{row},#{col}" } %>
+          <% if piece %>
+            <%= piece.piece_type.capitalize %> (<%= piece.color %>)
+          <% else %>
+            <%= "-" %>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Iniciar Jogo', new_game_path %>
