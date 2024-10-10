@@ -1,5 +1,8 @@
 <h1>Tabuleiro de Xadrez</h1>
 
+<!-- Mostra de quem é o turno -->
+<p>Turno: <%= @game.current_turn&.capitalize || 'Sem jogador' %></p>
+
 <table>
   <% (0..7).each do |row| %>
     <tr>
@@ -8,6 +11,8 @@
           <% piece = @game.pieces.find { |p| p.position == "#{row},#{col}" } %>
           <% if piece %>
             <%= piece.piece_type.capitalize %> (<%= piece.color %>)
+            <%= button_to 'Mover', move_piece_game_path(@game, piece_id: piece.id), method: :post, data: { confirm: 'Tem certeza que deseja mover a peça?' } %>
+            <!-- O botão agora chama o método move_piece com o ID da peça -->
           <% else %>
             <%= "-" %>
           <% end %>

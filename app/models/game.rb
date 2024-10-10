@@ -1,11 +1,17 @@
 class Game < ApplicationRecord
   has_many :pieces # Define a relação entre Game e Piece
+  attr_accessor :current_turn # Adicionando o atributo current_turn
 
   # Método que inicializa o jogo
   def initialize_game
-    setup_pieces # Chama o método que configura as peças
-    self.status = "running"             # Define o status do jogo como "em andamento"
-    self.current_player = "white"       # Define quem irá começar, neste caso os brancos
+    self.current_turn = 'white'  # Inicializa o turno como 'white' ou 'black'
+    setup_pieces # Chama o método para configurar as peças após a inicialização
+  end
+
+  # Altera o turno após um movimento
+  def switch_turn
+    self.current_turn = (current_turn == 'white' ? 'black' : 'white')
+    save
   end
 
   private
